@@ -1,0 +1,79 @@
+---
+const featuredPosts = [
+  {
+    title: 'Advances in Medical Grade Silicone Manufacturing',
+    excerpt: 'Exploring the latest innovations in medical silicone production and their impact on healthcare devices.',
+    author: 'Dr. Sarah Chen',
+    date: '2024-01-15',
+    category: 'Medical',
+    image: '/images/blog/medical-silicone.jpg',
+    href: '/blog/medical-silicone-manufacturing'
+  },
+  {
+    title: 'Sustainable Practices in Silicone Production',
+    excerpt: 'How we are implementing eco-friendly processes in silicone manufacturing.',
+    author: 'Michael Zhang',
+    date: '2024-01-10',
+    category: 'Sustainability',
+    image: '/images/blog/sustainable-production.jpg',
+    href: '/blog/sustainable-silicone-production'
+  }
+];
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+---
+
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        Latest Insights
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+        Stay updated with our latest articles and industry news
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-8 lg:grid-cols-2">
+      {featuredPosts.map((post) => (
+        <article class="relative bg-white rounded-lg shadow-sm overflow-hidden group">
+          <div class="h-64 relative">
+            <img
+              src={post.image}
+              alt={post.title}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <span class="px-2 py-1 text-xs font-medium bg-primary-600 rounded">
+                {post.category}
+              </span>
+              <h3 class="mt-2 text-xl font-semibold">
+                <a href={`/${currentLang}${post.href}`} class="hover:underline">
+                  {post.title}
+                </a>
+              </h3>
+              <div class="mt-2 flex items-center text-sm">
+                <span>{post.author}</span>
+                <span class="mx-2">•</span>
+                <time datetime={post.date}>
+                  {new Date(post.date).toLocaleDateString()}
+                </time>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a
+        href={`/${currentLang}/blog`}
+        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700"
+      >
+        View All Articles
+      </a>
+    </div>
+  </div>
+</section>

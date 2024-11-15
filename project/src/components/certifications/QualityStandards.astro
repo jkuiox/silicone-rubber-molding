@@ -1,0 +1,43 @@
+---
+const standards = [
+  {
+    title: 'Quality Control',
+    items: [
+      'In-process quality inspection',
+      'Final product testing',
+      'Material traceability',
+      'Documentation control'
+    ]
+  },
+  {
+    title: 'Testing Capabilities',
+    items: [
+      'Dimensional accuracy',
+      'Material properties',
+      'Performance testing',
+      'Durability assessment'
+    ]
+  }
+];
+---
+
+<div class="mt-24">
+  <h2 class="text-3xl font-bold text-gray-900 text-center">Quality Standards</h2>
+  <div class="mt-12 grid gap-8 md:grid-cols-2">
+    {standards.map((standard) => (
+      <div class="bg-gray-50 rounded-lg p-8">
+        <h3 class="text-xl font-semibold text-gray-900">{standard.title}</h3>
+        <ul class="mt-4 space-y-4">
+          {standard.items.map((item) => (
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-primary-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="ml-3 text-gray-700">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</div>

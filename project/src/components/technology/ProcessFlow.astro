@@ -1,0 +1,40 @@
+---
+const steps = [
+  {
+    number: '01',
+    name: 'Design & Engineering',
+    description: 'Advanced CAD/CAM design and simulation for optimal results'
+  },
+  {
+    number: '02',
+    name: 'Material Selection',
+    description: 'Expert material selection based on application requirements'
+  },
+  {
+    number: '03',
+    name: 'Prototyping',
+    description: 'Rapid prototyping for design validation and testing'
+  },
+  {
+    number: '04',
+    name: 'Production',
+    description: 'High-efficiency manufacturing with strict quality control'
+  }
+];
+---
+
+<div class="mt-16">
+  <h2 class="text-3xl font-bold text-gray-900 text-center">Manufacturing Process</h2>
+  <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+    {steps.map((step) => (
+      <div class="relative">
+        <div class="absolute h-full w-px bg-gray-200 left-8 top-8" />
+        <div class="relative">
+          <span class="text-4xl font-bold text-primary-600">{step.number}</span>
+          <h3 class="mt-4 text-xl font-semibold text-gray-900">{step.name}</h3>
+          <p class="mt-2 text-gray-500">{step.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

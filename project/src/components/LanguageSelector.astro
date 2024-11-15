@@ -1,0 +1,33 @@
+---
+import { languages } from '../i18n/ui';
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+
+// Remove language prefix from path
+const pathWithoutLang = currentPath.replace(`/${currentLang}`, '');
+---
+
+<div class="relative inline-block text-left">
+  <div class="relative">
+    <select
+      onChange="window.location.href = this.value"
+      class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md bg-white appearance-none"
+    >
+      {Object.entries(languages).map(([lang, label]) => (
+        <option 
+          value={`/${lang}${pathWithoutLang}`}
+          selected={currentLang === lang}
+          dir={lang === 'ar' ? 'rtl' : 'ltr'}
+        >
+          {label}
+        </option>
+      ))}
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+      <svg class="h-4 w-4 dropdown-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </div>
+</div>

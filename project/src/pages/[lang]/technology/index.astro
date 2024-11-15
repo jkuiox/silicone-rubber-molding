@@ -1,0 +1,134 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params;
+
+const technologies = [
+  {
+    name: 'Liquid Silicone Rubber (LSR) Molding',
+    description: 'State-of-the-art LSR injection molding technology for precise, high-volume production of complex silicone components. Our advanced equipment ensures consistent quality and optimal material properties.',
+    image: '/images/technology/lsr-molding.jpg',
+    features: [
+      'Precision injection control',
+      'Automated material handling',
+      'Real-time process monitoring',
+      'Temperature-controlled tooling'
+    ]
+  },
+  {
+    name: 'High Consistency Rubber (HCR) Processing',
+    description: 'Specialized HCR processing capabilities for manufacturing robust silicone parts with superior mechanical properties. Our process ensures excellent material distribution and cure characteristics.',
+    image: '/images/technology/hcr-processing.jpg',
+    features: [
+      'Optimized compression molding',
+      'Advanced material preparation',
+      'Precise cure control',
+      'Quality inspection systems'
+    ]
+  },
+  {
+    name: 'Clean Room Manufacturing',
+    description: 'ISO Class 7 certified clean room facilities for manufacturing medical and electronics components. Our controlled environment ensures the highest level of product purity and contamination control.',
+    image: '/images/technology/clean-room.jpg',
+    features: [
+      'HEPA filtration systems',
+      'Environmental monitoring',
+      'Controlled access protocols',
+      'Regular validation testing'
+    ]
+  }
+];
+
+const processSteps = [
+  {
+    number: '01',
+    title: 'Design & Engineering',
+    description: 'Advanced CAD/CAM design and simulation for optimal results'
+  },
+  {
+    number: '02',
+    title: 'Material Selection',
+    description: 'Expert material selection based on application requirements'
+  },
+  {
+    number: '03',
+    title: 'Prototyping',
+    description: 'Rapid prototyping for design validation and testing'
+  },
+  {
+    number: '04',
+    title: 'Production',
+    description: 'High-efficiency manufacturing with strict quality control'
+  }
+];
+---
+
+<Layout 
+  title="Manufacturing Technology"
+  description="Explore our advanced silicone manufacturing technologies and processes"
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          Our Technology
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Advanced manufacturing processes for precision silicone solutions
+        </p>
+      </div>
+
+      <div class="mt-16">
+        {technologies.map((tech, index) => (
+          <div class={`flex flex-col md:flex-row items-center gap-8 py-12 ${index !== technologies.length - 1 ? 'border-b border-gray-200' : ''}`}>
+            <div class="md:w-1/2">
+              <img
+                src={tech.image}
+                alt={tech.name}
+                class="w-full h-64 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+            <div class="md:w-1/2">
+              <h2 class="text-2xl font-bold text-gray-900">{tech.name}</h2>
+              <p class="mt-4 text-lg text-gray-500">{tech.description}</p>
+              <ul class="mt-6 space-y-3">
+                {tech.features.map((feature) => (
+                  <li class="flex items-center text-gray-600">
+                    <svg class="h-5 w-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-24">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Manufacturing Process</h2>
+        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {processSteps.map((step) => (
+            <div class="relative">
+              <div class="absolute h-full w-px bg-gray-200 left-8 top-8" />
+              <div class="relative">
+                <span class="text-4xl font-bold text-primary-600">{step.number}</span>
+                <h3 class="mt-4 text-xl font-semibold text-gray-900">{step.title}</h3>
+                <p class="mt-2 text-gray-500">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

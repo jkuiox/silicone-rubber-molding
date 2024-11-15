@@ -1,0 +1,54 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogGrid from '../../../components/blog/BlogGrid.astro';
+import Categories from '../../../components/blog/Categories.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params;
+const description = "Explore expert insights on silicone manufacturing, industry trends, and innovations. Stay updated with our latest articles on medical, automotive, and consumer applications.";
+
+// SEO Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Tayang Industry Blog",
+  "description": description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tayang Industry Co., Ltd",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tayang-industry.com/images/logo.png"
+    }
+  }
+};
+---
+
+<Layout 
+  title="Industry Insights & Expert Knowledge"
+  description={description}
+  schema={schema}
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          Industry Insights
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Expert perspectives on silicone manufacturing and industry trends
+        </p>
+      </div>
+      
+      <Categories />
+      <BlogGrid />
+    </div>
+  </div>
+</Layout>

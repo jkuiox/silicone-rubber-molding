@@ -1,0 +1,50 @@
+---
+---
+
+<div class="infinite-scroll-container" data-page="1">
+  <slot />
+  <div class="loading-spinner hidden">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+  </div>
+</div>
+
+<script>
+let isLoading = false;
+let currentPage = 1;
+const container = document.querySelector('.infinite-scroll-container');
+const spinner = document.querySelector('.loading-spinner');
+
+function loadMoreContent() {
+  if (isLoading) return;
+  
+  isLoading = true;
+  spinner.classList.remove('hidden');
+  
+  // Simulate API call with timeout
+  setTimeout(() => {
+    isLoading = false;
+    currentPage++;
+    spinner.classList.add('hidden');
+  }, 1000);
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !isLoading) {
+      loadMoreContent();
+    }
+  });
+}, { rootMargin: '100px' });
+
+if (spinner) {
+  observer.observe(spinner);
+}
+</script>
+
+<style>
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+</style>

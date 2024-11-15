@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { languages } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params;
+
+const lastUpdated = new Date().toLocaleDateString();
+---
+
+<Layout 
+  title="Terms of Service"
+  description="Read our terms of service and conditions for using Tayang Industry's products and services."
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900">Terms of Service</h1>
+        <p class="mt-4 text-gray-500">Last updated: {lastUpdated}</p>
+      </div>
+
+      <div class="mt-12 prose prose-lg">
+        <h2>1. Agreement to Terms</h2>
+        <p>By accessing or using our services, you agree to be bound by these terms. If you disagree with any part of the terms, you may not access our services.</p>
+
+        <h2>2. Products and Services</h2>
+        <p>All products and services are subject to:</p>
+        <ul>
+          <li>Availability and lead times</li>
+          <li>Quality specifications</li>
+          <li>Minimum order quantities</li>
+          <li>Price changes</li>
+        </ul>
+
+        <h2>3. Intellectual Property</h2>
+        <p>All intellectual property rights in our products, designs, and manufacturing processes are owned by Tayang Industry Co., Ltd.</p>
+
+        <h2>4. Confidentiality</h2>
+        <p>Any technical, commercial, or other confidential information shared between parties shall be kept strictly confidential.</p>
+
+        <h2>5. Quality Standards</h2>
+        <p>Our products are manufactured according to:</p>
+        <ul>
+          <li>ISO 9001:2015 standards</li>
+          <li>Industry-specific requirements</li>
+          <li>Agreed specifications</li>
+        </ul>
+
+        <h2>6. Warranty</h2>
+        <p>We warrant that our products will:</p>
+        <ul>
+          <li>Meet agreed specifications</li>
+          <li>Be free from defects in materials and workmanship</li>
+          <li>Comply with applicable standards</li>
+        </ul>
+
+        <h2>7. Limitation of Liability</h2>
+        <p>Our liability shall be limited to the value of the products supplied. We shall not be liable for indirect or consequential losses.</p>
+
+        <h2>8. Governing Law</h2>
+        <p>These terms are governed by the laws of the People's Republic of China.</p>
+
+        <h2>Contact Information</h2>
+        <p>For questions about these terms, please contact us at:<br>
+        Email: legal@tayang-industry.com<br>
+        Phone: +86 21 1234 5678</p>
+      </div>
+    </div>
+  </div>
+</Layout>

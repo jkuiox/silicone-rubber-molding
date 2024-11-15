@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import ProductShowcase from '../../components/ProductShowcase.astro';
+import Manufacturing from '../../components/Manufacturing.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import BlogPreview from '../../components/BlogPreview.astro';
+import TagCloud from '../../components/TagCloud.astro';
+import FAQ from '../../components/FAQ.astro';
+import { languages } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params;
+const description = "Tayang Industry - Leading manufacturer of premium silicone products and custom molding solutions. International quality standards with worldwide shipping.";
+---
+
+<Layout 
+  title="Premium Silicone Manufacturing Solutions"
+  description={description}
+  lang={lang}
+>
+  <Hero />
+  <ProductShowcase />
+  <Manufacturing />
+  <Testimonials />
+  <BlogPreview />
+  <TagCloud />
+  <FAQ />
+</Layout>

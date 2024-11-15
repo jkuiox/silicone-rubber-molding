@@ -1,0 +1,61 @@
+---
+const products = [
+  {
+    title: 'Custom Silicone Molding',
+    description: 'Precision-engineered silicone parts for any industry specification',
+    image: '/images/products/custom-molding.jpg'
+  },
+  {
+    title: 'Medical Grade Silicone',
+    description: 'ISO 13485 certified medical silicone components',
+    image: '/images/products/medical-grade.jpg'
+  },
+  {
+    title: 'Consumer Electronics',
+    description: 'High-performance silicone parts for electronic devices',
+    image: '/images/products/electronics.jpg'
+  },
+  {
+    title: 'Automotive Solutions',
+    description: 'Durable silicone components for automotive applications',
+    image: '/images/products/automotive.jpg'
+  }
+];
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+---
+
+<section class="py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        Our Product Range
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+        Discover our comprehensive range of silicone solutions
+      </p>
+    </div>
+
+    <div class="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {products.map((product) => (
+        <div class="relative group">
+          <div class="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1">
+            <img
+              src={product.image}
+              alt={product.title}
+              class="h-full w-full object-cover object-center"
+            />
+          </div>
+          <h3 class="mt-6 text-sm text-gray-500">
+            <a href={`/${currentLang}/products/${product.title.toLowerCase().replace(/\s+/g, '-')}`}>
+              <span class="absolute inset-0"></span>
+              {product.title}
+            </a>
+          </h3>
+          <p class="text-base font-semibold text-gray-900">{product.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

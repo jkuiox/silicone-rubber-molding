@@ -1,0 +1,104 @@
+---
+const products = [
+  {
+    id: 'med-001',
+    name: 'Medical Grade Silicone Components',
+    description: 'ISO 13485 certified silicone parts for medical devices and equipment',
+    price: 'Custom Quote',
+    image: '/images/products/medical-silicone.jpg',
+    category: 'Medical',
+    features: [
+      'Biocompatible',
+      'USP Class VI compliant',
+      'Clean room manufactured',
+      'Sterilization compatible'
+    ],
+    href: '/products/medical-grade-silicone'
+  },
+  {
+    id: 'elec-001',
+    name: 'Consumer Electronics Parts',
+    description: 'Custom silicone components for consumer electronics and devices',
+    price: 'Custom Quote',
+    image: '/images/products/electronics-parts.jpg',
+    category: 'Electronics',
+    features: [
+      'High precision',
+      'Custom colors',
+      'EMI shielding options',
+      'Heat resistant'
+    ],
+    href: '/products/consumer-electronics'
+  },
+  {
+    id: 'auto-001',
+    name: 'Automotive Silicone Solutions',
+    description: 'High-performance silicone parts for automotive applications',
+    price: 'Custom Quote',
+    image: '/images/products/automotive-parts.jpg',
+    category: 'Automotive',
+    features: [
+      'Temperature resistant',
+      'Oil resistant',
+      'UV stable',
+      'Custom durometer'
+    ],
+    href: '/products/automotive'
+  }
+];
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+---
+
+<div class="mt-12">
+  <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+    {products.map((product) => (
+      <div class="group relative bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <div class="aspect-w-4 aspect-h-3 rounded-t-lg overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.name}
+            class="w-full h-full object-center object-cover group-hover:opacity-75 transition-opacity"
+          />
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+              {product.category}
+            </span>
+          </div>
+        </div>
+        
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+            <a href={`/${currentLang}${product.href}`}>
+              {product.name}
+            </a>
+          </h3>
+          
+          <p class="text-gray-500 mb-4">{product.description}</p>
+          
+          <ul class="space-y-2 mb-6">
+            {product.features.map((feature) => (
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          
+          <div class="flex items-center justify-between">
+            <span class="text-lg font-medium text-gray-900">{product.price}</span>
+            <a
+              href={`/${currentLang}/contact/sales?product=${product.id}`}
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700"
+            >
+              Request Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

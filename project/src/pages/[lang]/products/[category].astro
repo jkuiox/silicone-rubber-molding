@@ -1,0 +1,153 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const categories = ['industrial', 'medical', 'electronics'];
+  const paths = [];
+
+  for (const lang of Object.keys(languages)) {
+    for (const category of categories) {
+      paths.push({
+        params: { lang, category }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, category } = Astro.params;
+
+const products = {
+  industrial: {
+    title: 'Industrial Silicone Solutions',
+    description: 'High-performance silicone components engineered for industrial applications.',
+    content: `
+      <h2>Industrial-Grade Silicone Components</h2>
+      <p>Our industrial silicone solutions are engineered to meet the demanding requirements of modern manufacturing and processing environments. Each product is designed for optimal performance, durability, and reliability.</p>
+
+      <h3>Technical Specifications</h3>
+      <ul>
+        <li>Temperature resistance: -60°C to +230°C</li>
+        <li>Shore A hardness: 30-80</li>
+        <li>Tensile strength: Up to 10.5 MPa</li>
+        <li>Elongation at break: ≥300%</li>
+      </ul>
+
+      <h3>Applications</h3>
+      <ul>
+        <li>Heavy machinery sealing</li>
+        <li>Chemical processing equipment</li>
+        <li>High-temperature environments</li>
+        <li>Vibration dampening systems</li>
+      </ul>
+
+      <h3>Quality Standards</h3>
+      <ul>
+        <li>ISO 9001:2015 certified manufacturing</li>
+        <li>RoHS compliance</li>
+        <li>REACH registered materials</li>
+      </ul>
+    `,
+    image: '/images/products/industrial-silicone.jpg'
+  },
+  medical: {
+    title: 'Medical Grade Silicone Components',
+    description: 'ISO 13485 certified silicone solutions for healthcare applications.',
+    content: `
+      <h2>Medical-Grade Silicone Products</h2>
+      <p>Our medical-grade silicone components are manufactured in ISO Class 7 clean rooms, meeting the strictest healthcare industry standards. Each product undergoes rigorous testing and validation.</p>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li>Biocompatibility tested</li>
+        <li>USP Class VI compliance</li>
+        <li>ISO 10993 certification</li>
+        <li>Clean room manufactured</li>
+      </ul>
+
+      <h3>Applications</h3>
+      <ul>
+        <li>Medical devices</li>
+        <li>Surgical instruments</li>
+        <li>Implantable components</li>
+        <li>Diagnostic equipment</li>
+      </ul>
+
+      <h3>Quality Assurance</h3>
+      <ul>
+        <li>100% lot traceability</li>
+        <li>Sterilization validation</li>
+        <li>Comprehensive documentation</li>
+      </ul>
+    `,
+    image: '/images/products/medical-silicone.jpg'
+  },
+  electronics: {
+    title: 'Consumer Electronics Silicone Parts',
+    description: 'Precision-engineered silicone components for electronic devices.',
+    content: `
+      <h2>Electronic Component Solutions</h2>
+      <p>Our silicone components for consumer electronics combine precision engineering with superior material properties to meet the exacting requirements of modern devices.</p>
+
+      <h3>Product Features</h3>
+      <ul>
+        <li>EMI shielding capabilities</li>
+        <li>Thermal management properties</li>
+        <li>Precision tolerances</li>
+        <li>Custom color matching</li>
+      </ul>
+
+      <h3>Applications</h3>
+      <ul>
+        <li>Mobile devices</li>
+        <li>Wearable technology</li>
+        <li>Computer peripherals</li>
+        <li>Audio equipment</li>
+      </ul>
+
+      <h3>Technical Specifications</h3>
+      <ul>
+        <li>Volume resistivity: 10^12 Ω·cm</li>
+        <li>Dielectric strength: >20 kV/mm</li>
+        <li>Thermal conductivity options</li>
+      </ul>
+    `,
+    image: '/images/products/electronics-silicone.jpg'
+  }
+};
+
+const productData = products[category];
+---
+
+<Layout 
+  title={productData.title}
+  description={productData.description}
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          {productData.title}
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          {productData.description}
+        </p>
+      </div>
+
+      <div class="mt-12">
+        <div class="aspect-w-16 aspect-h-9">
+          <img
+            src={productData.image}
+            alt={productData.title}
+            class="w-full h-96 object-cover rounded-lg shadow-lg"
+          />
+        </div>
+
+        <div class="mt-12 prose prose-lg mx-auto" set:html={productData.content} />
+      </div>
+    </div>
+  </div>
+</Layout>

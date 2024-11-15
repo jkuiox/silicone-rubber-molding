@@ -1,0 +1,134 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const categories = ['news', 'technical', 'cases'];
+  const paths = [];
+
+  for (const lang of Object.keys(languages)) {
+    for (const category of categories) {
+      paths.push({
+        params: { lang, category }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, category } = Astro.params;
+
+const titles = {
+  news: {
+    en: 'Industry News',
+    cn: '行业新闻',
+    jp: '業界ニュース',
+    de: 'Branchennews',
+    fr: 'Actualités de l\'industrie',
+    es: 'Noticias de la industria',
+    ar: 'أخبار الصناعة'
+  },
+  technical: {
+    en: 'Technical Articles',
+    cn: '技术文章',
+    jp: '技術記事',
+    de: 'Technische Artikel',
+    fr: 'Articles techniques',
+    es: 'Artículos técnicos',
+    ar: 'المقالات التقنية'
+  },
+  cases: {
+    en: 'Case Studies',
+    cn: '案例研究',
+    jp: 'ケーススタディ',
+    de: 'Fallstudien',
+    fr: 'Études de cas',
+    es: 'Casos de estudio',
+    ar: 'دراسات الحالة'
+  }
+};
+
+const title = titles[category]?.[lang] || titles[category]?.['en'] || 'Blog';
+---
+
+<Layout 
+  title={title}
+  description="Explore our latest insights and developments in silicone manufacturing technology"
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          {title}
+        </h1>
+      </div>
+      
+      <div class="mt-12 prose prose-lg mx-auto">
+        {category === 'technical' && (
+          <>
+            <h2>Latest Innovations in Silicone Manufacturing</h2>
+            <p>
+              The silicone manufacturing industry continues to evolve with groundbreaking technological advancements. 
+              Our latest technical insights explore cutting-edge developments in material science and processing techniques.
+            </p>
+            <img 
+              src="/images/blog/technical/manufacturing-innovation.jpg" 
+              alt="Silicone Manufacturing Innovation"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Advanced Processing Technologies</h2>
+            <p>
+              Modern silicone processing requires sophisticated equipment and precise control systems. 
+              Our technical experts share insights into the latest manufacturing methodologies and quality control processes.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+
+        {category === 'news' && (
+          <>
+            <h2>Industry Developments</h2>
+            <p>
+              Stay updated with the latest developments in the silicone manufacturing industry.
+              From market trends to regulatory updates, we cover everything you need to know.
+            </p>
+            <img 
+              src="/images/blog/news/industry-update.jpg" 
+              alt="Industry Updates"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Market Insights</h2>
+            <p>
+              Explore current market dynamics and future projections for the silicone industry.
+              Our experts analyze global trends and their impact on manufacturing.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+
+        {category === 'cases' && (
+          <>
+            <h2>Success Stories</h2>
+            <p>
+              Discover how our silicone solutions have helped clients overcome challenges and achieve their goals.
+              Each case study provides detailed insights into our problem-solving approach.
+            </p>
+            <img 
+              src="/images/blog/cases/success-story.jpg" 
+              alt="Success Stories"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Client Solutions</h2>
+            <p>
+              Learn about specific applications and custom solutions we've developed for various industries.
+              These real-world examples demonstrate our expertise and capabilities.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>

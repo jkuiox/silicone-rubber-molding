@@ -1,0 +1,134 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const categories = ['history', 'team', 'careers'];
+  const paths = [];
+
+  for (const lang of Object.keys(languages)) {
+    for (const category of categories) {
+      paths.push({
+        params: { lang, category }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, category } = Astro.params;
+
+const titles = {
+  history: {
+    en: 'Company History',
+    cn: '公司历史',
+    jp: '会社の歴史',
+    de: 'Firmengeschichte',
+    fr: 'Histoire de l\'entreprise',
+    es: 'Historia de la empresa',
+    ar: 'تاريخ الشركة'
+  },
+  team: {
+    en: 'Our Team',
+    cn: '我们的团队',
+    jp: '私たちのチーム',
+    de: 'Unser Team',
+    fr: 'Notre équipe',
+    es: 'Nuestro equipo',
+    ar: 'فريقنا'
+  },
+  careers: {
+    en: 'Careers',
+    cn: '职业发展',
+    jp: 'キャリア',
+    de: 'Karriere',
+    fr: 'Carrières',
+    es: 'Carreras',
+    ar: 'الوظائف'
+  }
+};
+
+const title = titles[category]?.[lang] || titles[category]?.['en'] || 'About';
+---
+
+<Layout 
+  title={title}
+  description="Learn about our company's journey, team, and opportunities"
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          {title}
+        </h1>
+      </div>
+      
+      <div class="mt-12 prose prose-lg mx-auto">
+        {category === 'history' && (
+          <>
+            <h2>Our Journey</h2>
+            <p>
+              Since our establishment in 1995, Tayang Industry has been at the forefront of silicone manufacturing innovation.
+              Our commitment to quality and customer satisfaction has driven our growth from a local manufacturer to a global leader.
+            </p>
+            <img 
+              src="/images/about/history/factory.jpg" 
+              alt="Tayang Industry Factory"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Milestones</h2>
+            <p>
+              Through decades of dedication and innovation, we've achieved numerous milestones that have shaped our company's success.
+              From obtaining international certifications to expanding our global presence, each step has strengthened our position.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+
+        {category === 'team' && (
+          <>
+            <h2>Leadership</h2>
+            <p>
+              Our experienced leadership team brings together decades of industry expertise and innovation.
+              Their vision and commitment drive our company's success and growth.
+            </p>
+            <img 
+              src="/images/about/team/leadership.jpg" 
+              alt="Leadership Team"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Expert Staff</h2>
+            <p>
+              Our talented team of engineers, technicians, and specialists ensures the highest quality in every product we manufacture.
+              Their dedication and expertise are the foundation of our success.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+
+        {category === 'careers' && (
+          <>
+            <h2>Join Our Team</h2>
+            <p>
+              At Tayang Industry, we offer exciting opportunities for talented individuals to grow and excel in their careers.
+              Join us in shaping the future of silicone manufacturing technology.
+            </p>
+            <img 
+              src="/images/about/careers/workplace.jpg" 
+              alt="Workplace"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Career Development</h2>
+            <p>
+              We invest in our employees' growth through comprehensive training programs and professional development opportunities.
+              Your success is our success.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>

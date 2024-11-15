@@ -1,0 +1,134 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  const categories = ['sales', 'support', 'locations'];
+  const paths = [];
+
+  for (const lang of Object.keys(languages)) {
+    for (const category of categories) {
+      paths.push({
+        params: { lang, category }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, category } = Astro.params;
+
+const titles = {
+  sales: {
+    en: 'Sales Inquiry',
+    cn: '销售咨询',
+    jp: '営業お問い合わせ',
+    de: 'Verkaufsanfrage',
+    fr: 'Demande commerciale',
+    es: 'Consulta de ventas',
+    ar: 'استفسار المبيعات'
+  },
+  support: {
+    en: 'Technical Support',
+    cn: '技术支持',
+    jp: '技術サポート',
+    de: 'Technischer Support',
+    fr: 'Support technique',
+    es: 'Soporte técnico',
+    ar: 'الدعم الفني'
+  },
+  locations: {
+    en: 'Global Locations',
+    cn: '全球据点',
+    jp: 'グローバル拠点',
+    de: 'Globale Standorte',
+    fr: 'Emplacements mondiaux',
+    es: 'Ubicaciones globales',
+    ar: 'المواقع العالمية'
+  }
+};
+
+const title = titles[category]?.[lang] || titles[category]?.['en'] || 'Contact';
+---
+
+<Layout 
+  title={title}
+  description="Get in touch with our expert team for sales, support, or general inquiries"
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          {title}
+        </h1>
+      </div>
+      
+      <div class="mt-12 prose prose-lg mx-auto">
+        {category === 'sales' && (
+          <>
+            <h2>Product Inquiries</h2>
+            <p>
+              Our sales team is ready to assist you with product information, quotations, and custom solutions.
+              We provide comprehensive support throughout your purchasing journey.
+            </p>
+            <img 
+              src="/images/contact/sales/team.jpg" 
+              alt="Sales Team"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Custom Solutions</h2>
+            <p>
+              Discuss your specific requirements with our expert sales team.
+              We'll help you find the perfect silicone solution for your application.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+
+        {category === 'support' && (
+          <>
+            <h2>Technical Assistance</h2>
+            <p>
+              Our technical support team provides expert guidance on product specifications, implementation, and troubleshooting.
+              Get professional assistance for all your technical inquiries.
+            </p>
+            <img 
+              src="/images/contact/support/technical-team.jpg" 
+              alt="Technical Support Team"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Product Support</h2>
+            <p>
+              Access detailed technical documentation and expert assistance for optimal product performance.
+              Our support team ensures you get the most out of our silicone solutions.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+
+        {category === 'locations' && (
+          <>
+            <h2>Global Presence</h2>
+            <p>
+              With facilities and offices around the world, we provide local support with global expertise.
+              Find your nearest Tayang Industry location.
+            </p>
+            <img 
+              src="/images/contact/locations/global-map.jpg" 
+              alt="Global Locations"
+              class="my-8 rounded-lg shadow-lg"
+            />
+            <h2>Regional Offices</h2>
+            <p>
+              Our strategically located offices ensure efficient service and support for customers worldwide.
+              Contact your regional office for personalized assistance.
+            </p>
+            <!-- More content -->
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,37 @@
+---
+const technologies = [
+  {
+    name: 'Liquid Silicone Rubber (LSR) Molding',
+    description: 'Advanced LSR injection molding technology for precise, high-volume production',
+    image: '/images/technology/lsr-molding.jpg'
+  },
+  {
+    name: 'High Consistency Rubber (HCR) Processing',
+    description: 'Specialized HCR processing for complex silicone parts',
+    image: '/images/technology/hcr-processing.jpg'
+  },
+  {
+    name: 'Clean Room Manufacturing',
+    description: 'ISO Class 7 clean room facilities for medical and electronics components',
+    image: '/images/technology/clean-room.jpg'
+  }
+];
+---
+
+<div class="mt-16">
+  {technologies.map((tech) => (
+    <div class="flex flex-col md:flex-row items-center gap-8 py-12 border-b border-gray-200">
+      <div class="md:w-1/2">
+        <img
+          src={tech.image}
+          alt={tech.name}
+          class="w-full h-64 object-cover rounded-lg"
+        />
+      </div>
+      <div class="md:w-1/2">
+        <h2 class="text-2xl font-bold text-gray-900">{tech.name}</h2>
+        <p class="mt-4 text-lg text-gray-500">{tech.description}</p>
+      </div>
+    </div>
+  ))}
+</div>

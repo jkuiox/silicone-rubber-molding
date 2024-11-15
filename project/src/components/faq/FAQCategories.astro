@@ -1,0 +1,27 @@
+---
+const categories = [
+  { name: 'General', href: '#general', current: true },
+  { name: 'Products', href: '#products' },
+  { name: 'Manufacturing', href: '#manufacturing' },
+  { name: 'Quality', href: '#quality' },
+  { name: 'Shipping', href: '#shipping' }
+];
+---
+
+<div class="mt-8">
+  <div class="flex space-x-4 overflow-x-auto pb-4">
+    {categories.map((category) => (
+      <a
+        href={category.href}
+        class:list={[
+          'px-4 py-2 text-sm font-medium rounded-md',
+          category.current
+            ? 'bg-primary-100 text-primary-800'
+            : 'text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100'
+        ]}
+      >
+        {category.name}
+      </a>
+    ))}
+  </div>
+</div>

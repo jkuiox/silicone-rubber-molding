@@ -1,0 +1,92 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter, lang } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  "image": frontmatter.image,
+  "author": {
+    "@type": "Person",
+    "name": frontmatter.author
+  },
+  "datePublished": frontmatter.date,
+  "keywords": frontmatter.tags.join(", ")
+};
+---
+
+<Layout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  lang={lang}
+  schema={schema}
+>
+  <article class="pt-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="text-center">
+        <div class="flex justify-center space-x-2 mb-4">
+          {frontmatter.tags.map((tag) => (
+            <a
+              href={`/${lang}/blog/tag/${tag.toLowerCase()}`}
+              class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 hover:bg-primary-200"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+        
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+          {frontmatter.title}
+        </h1>
+        
+        <div class="mt-4 flex items-center justify-center space-x-4 text-gray-500">
+          <span>{frontmatter.author}</span>
+          <span>•</span>
+          <time datetime={frontmatter.date}>
+            {new Date(frontmatter.date).toLocaleDateString()}
+          </time>
+        </div>
+      </header>
+
+      <div class="mt-8">
+        <img
+          src={frontmatter.image}
+          alt={frontmatter.title}
+          class="w-full h-96 object-cover rounded-lg shadow-lg"
+        />
+      </div>
+
+      <div class="mt-12 prose prose-lg mx-auto">
+        <slot />
+      </div>
+
+      <footer class="mt-12 pt-8 border-t border-gray-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <span class="text-gray-500">Share this article:</span>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Twitter</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">LinkedIn</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a href={`/${lang}/blog`} class="text-primary-600 hover:text-primary-700">
+            ← Back to Blog
+          </a>
+        </div>
+      </footer>
+    </div>
+  </article>
+</Layout>

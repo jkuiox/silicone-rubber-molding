@@ -1,0 +1,30 @@
+---
+const contactDetails = {
+  address: '123 Industrial Park Road, Shanghai, China',
+  phone: '+86 21 1234 5678',
+  email: 'info@tayang-industry.com',
+  hours: 'Monday - Friday: 9:00 AM - 6:00 PM (GMT+8)'
+};
+---
+
+<div class="bg-gray-50 rounded-lg p-6 mb-8">
+  <h3 class="text-lg font-medium text-gray-900">Contact Information</h3>
+  <dl class="mt-4 space-y-4">
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Address</dt>
+      <dd class="mt-1 text-sm text-gray-900">{contactDetails.address}</dd>
+    </div>
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Phone</dt>
+      <dd class="mt-1 text-sm text-gray-900">{contactDetails.phone}</dd>
+    </div>
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Email</dt>
+      <dd class="mt-1 text-sm text-gray-900">{contactDetails.email}</dd>
+    </div>
+    <div>
+      <dt class="text-sm font-medium text-gray-500">Business Hours</dt>
+      <dd class="mt-1 text-sm text-gray-900">{contactDetails.hours}</dd>
+    </div>
+  </dl>
+</div>

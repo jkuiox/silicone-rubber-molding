@@ -1,0 +1,13 @@
+---
+import { defaultLang } from '../i18n/ui';
+
+// Redirect to default language
+export const prerender = false;
+
+const redirectTo = `/${defaultLang}`;
+---
+
+<meta http-equiv="refresh" content={`0;url=${redirectTo}`}>
+<script define:vars={{ redirectTo }}>
+  window.location.href = redirectTo;
+</script>

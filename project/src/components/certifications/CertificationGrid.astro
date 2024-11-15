@@ -1,0 +1,39 @@
+---
+const certifications = [
+  {
+    name: 'ISO 9001:2015',
+    description: 'Quality Management System certification ensuring consistent, high-quality manufacturing processes',
+    image: '/images/certifications/iso-9001.jpg',
+    issuer: 'International Organization for Standardization'
+  },
+  {
+    name: 'ISO 13485:2016',
+    description: 'Medical Devices Quality Management System certification for healthcare products',
+    image: '/images/certifications/iso-13485.jpg',
+    issuer: 'International Organization for Standardization'
+  },
+  {
+    name: 'IATF 16949:2016',
+    description: 'Automotive Quality Management System certification',
+    image: '/images/certifications/iatf-16949.jpg',
+    issuer: 'International Automotive Task Force'
+  }
+];
+---
+
+<div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+  {certifications.map((cert) => (
+    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+      <div class="p-6">
+        <img
+          src={cert.image}
+          alt={cert.name}
+          class="h-32 w-auto mx-auto mb-6"
+        />
+        <h3 class="text-xl font-semibold text-gray-900">{cert.name}</h3>
+        <p class="mt-2 text-sm text-gray-500">{cert.description}</p>
+        <p class="mt-4 text-xs text-gray-400">Issued by: {cert.issuer}</p>
+      </div>
+    </div>
+  ))}
+</div>

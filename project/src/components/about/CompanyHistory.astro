@@ -1,0 +1,46 @@
+---
+const milestones = [
+  {
+    year: '1995',
+    title: 'Company Founded',
+    description: 'Established as a specialized silicone manufacturer in China.'
+  },
+  {
+    year: '2005',
+    title: 'International Expansion',
+    description: 'Began serving global markets with advanced silicone solutions.'
+  },
+  {
+    year: '2015',
+    title: 'Innovation Center',
+    description: 'Opened state-of-the-art R&D facility for silicone technology.'
+  },
+  {
+    year: '2020',
+    title: 'Industry 4.0',
+    description: 'Implemented smart manufacturing and automation systems.'
+  }
+];
+---
+
+<div class="mt-16">
+  <h2 class="text-3xl font-bold text-gray-900 text-center">Our Journey</h2>
+  <div class="mt-12 relative">
+    <div class="absolute top-0 left-1/2 w-px h-full bg-gray-200 -translate-x-1/2"></div>
+    <div class="space-y-16">
+      {milestones.map((milestone) => (
+        <div class="relative">
+          <div class="flex items-center justify-center">
+            <span class="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              {milestone.year}
+            </span>
+          </div>
+          <div class="mt-4 text-center">
+            <h3 class="text-xl font-semibold text-gray-900">{milestone.title}</h3>
+            <p class="mt-2 text-gray-500">{milestone.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

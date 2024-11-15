@@ -1,0 +1,35 @@
+---
+const tags = [
+  { name: 'Medical', count: 12 },
+  { name: 'Manufacturing', count: 18 },
+  { name: 'Innovation', count: 15 },
+  { name: 'Sustainability', count: 8 },
+  { name: 'Quality', count: 10 },
+  { name: 'Automotive', count: 7 },
+  { name: 'Electronics', count: 9 }
+];
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+---
+
+<div class="py-12 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-gray-900">Popular Topics</h2>
+    </div>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      {tags.map((tag) => (
+        <a
+          href={`/${currentLang}/blog/tag/${tag.name.toLowerCase()}`}
+          class="group relative inline-flex items-center px-4 py-2 rounded-full bg-white shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+        >
+          <span class="text-gray-900 text-sm font-medium">{tag.name}</span>
+          <span class="ml-2 text-gray-500 text-xs transition-opacity duration-200 opacity-0 group-hover:opacity-100">
+            {tag.count} articles
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

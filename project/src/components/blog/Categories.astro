@@ -1,0 +1,28 @@
+---
+const categories = [
+  { name: 'All', href: '/blog', count: 15 },
+  { name: 'Medical', href: '/blog/category/medical', count: 4 },
+  { name: 'Automotive', href: '/blog/category/automotive', count: 3 },
+  { name: 'Electronics', href: '/blog/category/electronics', count: 3 },
+  { name: 'Sustainability', href: '/blog/category/sustainability', count: 5 }
+];
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+---
+
+<div class="mt-8">
+  <div class="flex flex-wrap justify-center gap-4">
+    {categories.map((category) => (
+      <a
+        href={`/${currentLang}${category.href}`}
+        class="group relative inline-flex items-center px-4 py-2 rounded-full bg-white shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+      >
+        <span class="text-gray-900 text-sm font-medium">{category.name}</span>
+        <span class="ml-2 text-gray-500 text-xs">
+          ({category.count})
+        </span>
+      </a>
+    ))}
+  </div>
+</div>

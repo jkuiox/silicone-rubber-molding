@@ -1,0 +1,206 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { languages } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params;
+
+const history = [
+  {
+    year: '1995',
+    title: 'Company Founded',
+    description: 'Established as a specialized silicone manufacturer in Shanghai, China.'
+  },
+  {
+    year: '2005',
+    title: 'International Expansion',
+    description: 'Expanded operations to serve global markets with advanced silicone solutions.'
+  },
+  {
+    year: '2015',
+    title: 'Innovation Center',
+    description: 'Opened state-of-the-art R&D facility for silicone technology development.'
+  },
+  {
+    year: '2020',
+    title: 'Industry 4.0',
+    description: 'Implemented smart manufacturing and automation systems.'
+  }
+];
+
+const team = [
+  {
+    name: 'John Zhang',
+    role: 'CEO',
+    image: '/images/team/ceo.jpg',
+    bio: '20+ years experience in silicone manufacturing'
+  },
+  {
+    name: 'Dr. Sarah Chen',
+    role: 'Head of R&D',
+    image: '/images/team/rd-head.jpg',
+    bio: 'PhD in Materials Science, leading innovation'
+  },
+  {
+    name: 'Michael Wang',
+    role: 'Operations Director',
+    image: '/images/team/operations.jpg',
+    bio: 'Expert in lean manufacturing processes'
+  }
+];
+
+const values = [
+  {
+    title: 'Innovation',
+    description: 'Continuously pushing boundaries in silicone technology',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z'
+  },
+  {
+    title: 'Quality',
+    description: 'Unwavering commitment to product excellence',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+  },
+  {
+    title: 'Sustainability',
+    description: 'Environmentally responsible manufacturing practices',
+    icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
+  }
+];
+
+const careers = [
+  {
+    title: 'R&D Engineer',
+    department: 'Research & Development',
+    location: 'Shanghai, China',
+    type: 'Full-time'
+  },
+  {
+    title: 'Quality Control Specialist',
+    department: 'Manufacturing',
+    location: 'Shanghai, China',
+    type: 'Full-time'
+  },
+  {
+    title: 'International Sales Manager',
+    department: 'Sales',
+    location: 'Multiple Locations',
+    type: 'Full-time'
+  }
+];
+---
+
+<Layout 
+  title="About Us"
+  description="Learn about Tayang Industry's journey, values, and commitment to excellence in silicone manufacturing"
+  lang={lang}
+>
+  <div class="pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          About Us
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          A legacy of excellence in silicone manufacturing
+        </p>
+      </div>
+
+      <!-- Company History -->
+      <div class="mt-24">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Our Journey</h2>
+        <div class="mt-12 relative">
+          <div class="absolute top-0 left-1/2 w-px h-full bg-gray-200 -translate-x-1/2"></div>
+          <div class="space-y-16">
+            {history.map((milestone) => (
+              <div class="relative">
+                <div class="flex items-center justify-center">
+                  <span class="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    {milestone.year}
+                  </span>
+                </div>
+                <div class="mt-4 text-center">
+                  <h3 class="text-xl font-semibold text-gray-900">{milestone.title}</h3>
+                  <p class="mt-2 text-gray-500">{milestone.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Section -->
+      <div class="mt-24">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Leadership Team</h2>
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {team.map((member) => (
+            <div class="text-center">
+              <div class="relative">
+                <img
+                  class="mx-auto h-40 w-40 rounded-full object-cover"
+                  src={member.image}
+                  alt={member.name}
+                />
+              </div>
+              <h3 class="mt-6 text-lg font-medium text-gray-900">{member.name}</h3>
+              <p class="text-sm text-primary-600">{member.role}</p>
+              <p class="mt-2 text-base text-gray-500">{member.bio}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Core Values -->
+      <div class="mt-24">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Our Values</h2>
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {values.map((value) => (
+            <div class="text-center">
+              <div class="mx-auto h-12 w-12 text-primary-600">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={value.icon}></path>
+                </svg>
+              </div>
+              <h3 class="mt-6 text-lg font-medium text-gray-900">{value.title}</h3>
+              <p class="mt-2 text-base text-gray-500">{value.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Careers -->
+      <div class="mt-24">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Careers</h2>
+        <div class="mt-12">
+          <div class="space-y-4">
+            {careers.map((position) => (
+              <div class="bg-white shadow-sm rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-900">{position.title}</h3>
+                <div class="mt-2 flex flex-wrap gap-4">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                    {position.department}
+                  </span>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                    {position.location}
+                  </span>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                    {position.type}
+                  </span>
+                </div>
+                <div class="mt-4">
+                  <a href="#" class="text-primary-600 hover:text-primary-700 font-medium">
+                    Learn more →
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

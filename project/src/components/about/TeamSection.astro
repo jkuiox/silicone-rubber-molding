@@ -1,0 +1,48 @@
+---
+const team = [
+  {
+    name: 'John Zhang',
+    role: 'CEO',
+    image: '/images/team/ceo.jpg',
+    bio: '20+ years experience in silicone manufacturing'
+  },
+  {
+    name: 'Dr. Sarah Chen',
+    role: 'Head of R&D',
+    image: '/images/team/rd-head.jpg',
+    bio: 'PhD in Materials Science, leading innovation'
+  },
+  {
+    name: 'Michael Wang',
+    role: 'Operations Director',
+    image: '/images/team/operations.jpg',
+    bio: 'Expert in lean manufacturing processes'
+  },
+  {
+    name: 'Emily Liu',
+    role: 'Quality Control Manager',
+    image: '/images/team/quality.jpg',
+    bio: 'Ensures highest product standards'
+  }
+];
+---
+
+<div class="mt-24">
+  <h2 class="text-3xl font-bold text-gray-900 text-center">Leadership Team</h2>
+  <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    {team.map((member) => (
+      <div class="text-center">
+        <div class="relative">
+          <img
+            class="mx-auto h-40 w-40 rounded-full object-cover"
+            src={member.image}
+            alt={member.name}
+          />
+        </div>
+        <h3 class="mt-6 text-lg font-medium text-gray-900">{member.name}</h3>
+        <p class="text-sm text-primary-600">{member.role}</p>
+        <p class="mt-2 text-base text-gray-500">{member.bio}</p>
+      </div>
+    ))}
+  </div>
+</div>
